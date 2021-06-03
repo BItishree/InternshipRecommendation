@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate Edit</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/StudentProfileEdit.css' %}                                                                                                                                                                                                                                                                                                                                                                                                                                                                 " >
+
+         <!-- Bootstrap -->
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+         <!-- Font-awesome -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+
+<section class="py-1 fixed-top" style="background-color: rgb(1, 23, 51)">
+      <nav class="navbar navbar-expand-sm navbar-light mx-4">
+        <!-- Brand/logo -->
+        <a
+          class="navbar-brand"
+          href="{% url 'internships' %}"
+          style="
+            font-size: 25px;
+            font-weight: 400;
+            color: #e7e9ee;
+            letter-spacing: 2px;
+            margin-left: 10px;
+            text-transform: uppercase;
+          "
+          >SimplyIntern</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa fa-bars" aria-hidden="true" style="color: #fff;"></i>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'internships' %}">
+                <i class="fa fa-info" aria-hidden="true"></i> <span style="margin-left: 3px;">Internships</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dashboard' %}">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i> <span style="margin-left: 3px;">Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">
+                <i class="fa fa-user" aria-hidden="true"></i> Hey, {{user.student.name}}</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="btn" href="/logout" style="padding: 5px; background-color: rgb(212, 51, 51); color: #fff; font-weight: 600; border-radius: 5px; font-size: 13px; margin-top: 5px;">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+        <!-- ----------------- FORM ---------------  -->
+
+        <section class="get_in_touch" style="margin-top: 100px;">
+            <h3 class="text-center">
+                Add New Certificate
+            </h3>
+            <hr>
+
+            <div class="container">
+                <div>
+                    <form
+                    name="resumeform"
+                    id="resumeform"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                        <div class="form-group">
+                        <label >Title</label>
+                        <input type="text" name="title" class="form-control"  placeholder="Certificate title">
+                        </div>
+
+                        <div class="form-group">
+                        <label >Company Name</label>
+                        <input type="text" name="company" class="form-control"  placeholder="Company name">
+                        </div>
+
+                        <div class="form-group">
+                        <label >Certification Year</label>
+                        <input type="text" name="cyear" class="form-control"  placeholder="2021">
+                        </div>
+
+                        <div class="form-group">
+                        <label >Credention id :</label>
+                        <input type="text" name="credential" class="form-control"  value="">
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label >Certificate :</label>
+                            <input type="file" name="Certificate_file" style="display: block;">
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" onclick="validateForm();" class="btn btn-primary" style="width: 200px;">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- -------------------- FOOTER SECTION -------------------- -->
+    <section id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- <img src="images/logo.png" class="footer-logo"> -->
+                    <h2>
+                        SimpleHired
+                    </h2>
+                    <p style="text-align: justify;">
+                    SimplyIntern helps thousands of students find great internships
+                    and be a ladder in their success.
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <h1>
+                        Features
+                    </h1>
+                    <p>
+                        Certification
+                    </p>
+                    <p>
+                        Free Apply
+                    </p>
+                    <p>
+                        Flexible Time
+                    </p>
+                    <p>
+                        Jobs for freshers
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <h1>
+                        Quick Contact
+                    </h1>
+                    <p> <i class="fa fa-phone-square"></i>
+                        +91 7377515257
+                    </p>
+                    <p> <i class="fa fa-envelope"></i>
+                        ankit4b@gmail.com
+                    </p>
+                    <p> <i class="fa fa-home"></i>
+                        Tulsinagar, Balangir
+                    </p>
+                    <p class="city">
+                        Odisha, India
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <h1>
+                        Follow Us On
+                    </h1>
+                    <p> <i class="fa fa-facebook-official"></i>
+                        Facebook
+                    </p>
+                    <p> <i class="fa fa-youtube-play"></i>
+                        Youtube
+                    </p>
+                    <p> <i class="fa fa-linkedin"></i>
+                        Linkedin
+                    </p>
+                    <p> <i class="fa fa-twitter"></i>
+                        Twitter
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
